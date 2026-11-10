@@ -39,13 +39,13 @@ public class GestoreClient extends Thread {
             // scelta personalita iniziale con controllo errore
             String sceltaPersonalita = in.readUTF().trim();
             
-            while (!PallaMagica.valida(sceltaPersonalita)) {
+            while (!PallaMagicaJson.valida(sceltaPersonalita)) {
                 out.writeUTF("Personalita non valida, Scegli tra: Normale, Secca, Bini, Meme");
                 out.flush();
                 sceltaPersonalita = in.readUTF().trim();
             }
 
-            PallaMagica palla = new PallaMagica(sceltaPersonalita);
+            PallaMagicaJson palla = new PallaMagicaJson (sceltaPersonalita);
 
             out.writeUTF("Personalita impostata: " + palla.getPersonalita().toUpperCase());
             out.writeUTF("Premi 'aiuto' per le istruzioni, oppure fai subito una domanda");
@@ -73,13 +73,13 @@ public class GestoreClient extends Thread {
                     out.flush();
                     String nuovaPersonalita = in.readUTF().trim();
                     
-                    while (!PallaMagica.valida(nuovaPersonalita)) {
+                    while (!PallaMagicaJson .valida(nuovaPersonalita)) {
                         out.writeUTF("Personalita non valida, Scegli tra: Normale, Secca, Bini, Meme");
                         out.flush();
                         nuovaPersonalita = in.readUTF().trim();
                     }
                     
-                    palla = new PallaMagica(nuovaPersonalita);
+                    palla = new PallaMagicaJson (nuovaPersonalita);
                     out.writeUTF("Personalita impostata: " + palla.getPersonalita().toUpperCase());
                 } else {
                     System.out.println("Client #" + idClient + " chiede: " + messaggio);
