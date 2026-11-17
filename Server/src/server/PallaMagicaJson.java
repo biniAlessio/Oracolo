@@ -14,13 +14,13 @@ import java.util.*;
  */
 public class PallaMagicaJson {
      private final String personalita;
-    private final Map<String, List<String>> catalogo;
+    private final Map<String, List<String>> lista;
     private final Random random = new Random();
  
     public PallaMagicaJson(String personalita) throws Exception {
         this.personalita = personalita.toLowerCase();
         String testo = new String(Files.readAllBytes(Paths.get("risposte.json")), java.nio.charset.StandardCharsets.UTF_8);
-        this.catalogo = new Gson().fromJson(testo.replace("\uFEFF", ""), Map.class);
+        this.lista = new Gson().fromJson(testo.replace("\uFEFF", ""), Map.class);
     }
  
     public String getPersonalita() {
@@ -32,7 +32,7 @@ public class PallaMagicaJson {
     }
  
     public String rispondi(String domanda) {
-        List<String> risposte = catalogo.get(personalita);
+        List<String> risposte = lista.get(personalita);
         return "[" + personalita.toUpperCase() + "]: " + risposte.get(random.nextInt(risposte.size()));
     }
 }
